@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>File Upload & Image Preview</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}"/>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h2> Upload Image </h2>
+<br>
+<!-- Upload  -->
+<form id="file-upload-form" class="uploader" action="/output" method="post" enctype="multipart/form-data">
+  <input id="file-upload" type="file" name="image" accept="image/*" />
+  <label for="file-upload" id="file-drag">
+    <img id="file-image" src="#" alt="Preview" class="hidden">
+    <div id="start">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Select a file or drag here</div>
+      <div id="notimage" class="hidden">Please select an image</div>
+      <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+    </div>
+    <div id="response" class="hidden">
+      <div id="messages"></div>
+      <progress class="progress" id="file-progress" value="0">
+        <span>0</span>%
+      </progress>
+    </div>
+  </label>
+  <input type="submit" value="search Image" name="submit" class="btn btn-primary">
+</form>
+
+
+
+<!-- partial -->
+  <script type="text/javascript" src=" {{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script  type="text/javascript" src=" {{ url_for('static', filename='js/script.js') }}" ></script>
+
+</body>
+</html>

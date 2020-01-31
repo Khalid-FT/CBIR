@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Similar Images</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}"/>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h2> Query Image </h2>
+<br>
+<div align="center">
+ {{query_name}}<br>
+ <img src="{{ query_image }}" alt="query image">
+</div>
+<h2> Similar images </h2>
+<br>
+ 
+ <div align="center">
+{% for i , img in similar_images %}
+<br>{{img}}<br>
+<img src="../static/results/{{img}}" alt="similar image">
+<br>
+      
+        <input type="radio"  name="feedback" value="-10"> Good
+        <input type="radio" name="feedback" value="20"> Bad
+         
+        <button type="button" class="btn btn-primary" onclick="displayDate{{i}}()">Apply</button>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+      
+function displayDate{{i}}() {
+
+
+        var formdata = {"queryimage":"{{ query_image }}" ,  "name_img":"{{img}}", "index":{{i}}, "value":$("input[name='feedback']:checked").val() }
+           $.ajax({
+                 type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formdata),
+                dataType: 'json',
+                url: 'http://127.0.0.1:5000/do_something',
+                success: function (e) {
+                    console.log(e);
+                    
+                },
+                error: function(error) {
+                console.log(error);
+            }
+            });
+
+
+
+
+
+}
+</script>
+{% endfor %}
+</div>
+        
+       
+
+<!-- partial -->
+  <script type="text/javascript" src=" {{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script  type="text/javascript" src=" {{ url_for('static', filename='js/script.js') }}" ></script>
+  
+
+
+</body>
+</html>
